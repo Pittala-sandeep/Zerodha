@@ -1,0 +1,16 @@
+.ticket h6 {
+    font-weight: bold;
+    margin-top: 1rem;
+}
+.ticket .icon-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 20px;
+}
+.ticket a {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #7fb0f9;
+    text-decoration: none;
+}

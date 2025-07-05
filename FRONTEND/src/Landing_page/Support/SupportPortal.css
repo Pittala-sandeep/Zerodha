@@ -1,0 +1,37 @@
+.portal{
+    background-color: #3b82f6;
+    color: white;
+}
+
+.search-box {
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+}
+.search-box i {
+    color: #555;
+}
+.link-underline {
+    border-bottom: 1px solid white;
+    text-decoration: none;
+    color: white;
+}
+.link-underline:hover {
+    text-decoration: underline;
+}
+
+.search-box input{
+    background-color: white;
+}
+
+.portal a:hover{
+    color: white !important;
+}
+
