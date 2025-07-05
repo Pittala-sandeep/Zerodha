@@ -20,6 +20,7 @@ const BuyActionWindow = ({ uuid }) => {
     });
 
     generalContext.closeBuyWindow();
+    console.log("Buy")
   };
 
   const handleCancelClick = () => {
