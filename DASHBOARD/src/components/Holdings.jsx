@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { VerticalBar } from "./VerticalBarChart";
 
 const Holdings = () => {
   let [data, setData] = useState([])
@@ -11,6 +12,19 @@ const Holdings = () => {
      .then(res => setData(res.data))
      .catch(err => console.error(err));
   },[])
+
+  let labels = data.map((subArray) => subArray["name"])
+
+  const Ddata = {
+    labels,
+    datasets: [
+      {
+        label: 'Instrument',
+        data: data.map((stock) => stock.price ),
+        backgroundColor: 'rgba(245, 255, 99, 0.99)',
+      },
+    ]
+  }
 
   return (
     <>
@@ -74,6 +88,7 @@ const Holdings = () => {
           <p>P&L</p>
         </div>
       </div>
+      <VerticalBar data={Ddata}/>
     </>
   );
 };

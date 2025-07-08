@@ -5,9 +5,11 @@ const Mongo_URL = process.env.Mongo_URL;
 const Holding = require("../models/holdings.js")
 const Position = require("../models/positions.js")
 const Watchlist = require("../models/watchlist.js")
+const User = require("../models/User");
 const holdings = require("./holdings.js")
 const positions = require("./positions.js")
 const watchlist = require("./watchlist.js")
+const users = require("./User.js")
 
 main().catch(err => console.log(err));
 
@@ -39,3 +41,11 @@ const watchlistData = async () => {
 }
 
 watchlistData();
+
+const userData = async () => {
+    await User.deleteMany({});
+    await User.insertMany(users.Data);
+    console.log("User Data initialized")
+}
+
+userData();
