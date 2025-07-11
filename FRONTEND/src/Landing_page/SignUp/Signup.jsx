@@ -3,7 +3,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function SignUp() {
-  const [alertMessage, setAlertMessage] = useState("");
   const [errors, setErrors] = useState({});
   let [inputValue, setInputValue] = useState({
     email: "",
@@ -46,6 +45,8 @@ export default function SignUp() {
         { withCredentials: true }
       );
 
+      console.log(data)
+
       const handleError = (err) =>
         toast.error(err, {
           position: "bottom-left",
@@ -59,7 +60,7 @@ export default function SignUp() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "http://localhost:5174";
+          window.location.href = "http://localhost:5173";
         }, 1000);
       } else {
         handleError(message);
@@ -74,14 +75,6 @@ export default function SignUp() {
       username: "",
     });
   };
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const msg = params.get("message");
-    if (msg) {
-      setAlertMessage(msg);
-    }
-  }, []);
 
   return (
     <div className="col-6 mt-3">
@@ -143,11 +136,6 @@ export default function SignUp() {
           Already have an account? <a href="/login">Login</a>
         </span>
       </form>
-      <div>
-        {alertMessage && (
-          <div className="alert alert-warning">{alertMessage}</div>
-        )}
-      </div>
       <ToastContainer />
     </div>
   );

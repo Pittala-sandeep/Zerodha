@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
 const ExpressError = require("./uilts/ExpressError.js")
 
@@ -20,6 +21,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(cookieParser());
 
 
 const Holding = require("./models/holdings.js");
@@ -29,7 +31,7 @@ const Order = require("./models/Order.js");
 const User = require("./models/Users.js");
 
 const { createSecretToken } = require("./uilts/SecretToken.js");
-const { validateUser } = require('./uilts/middleware.js');
+const { validateUser, userVerification } = require('./uilts/middleware.js');
 const WrapAsync = require('./uilts/WrapAsync.js');
 
 
@@ -87,7 +89,7 @@ app.post("/signup", validateUser, WrapAsync(async (req, res, next) => {
     let {username, email, password, createdAt} = req.body;
     let user = await User.findOne({email:`${email}`});
     if(user){
-      return res.json({ message: "User already exists" });
+      return res.json({ success: false, message: "User already exists" });
     }
     let newUser = new User({
       username : username,
@@ -96,7 +98,7 @@ app.post("/signup", validateUser, WrapAsync(async (req, res, next) => {
       createdAt : createdAt
     })
 
-    newUser.save();
+    await newUser.save();
 
     let token = createSecretToken(newUser._id);
     res.cookie("token", token,{
@@ -106,7 +108,6 @@ app.post("/signup", validateUser, WrapAsync(async (req, res, next) => {
     res
       .status(201)
       .json({ message: "User signed in successfully", success: true, user });
-    next();
 }))
 
 app.post("/login", WrapAsync(async (req, res, next) => {
@@ -127,9 +128,10 @@ app.post("/login", WrapAsync(async (req, res, next) => {
       withCredentials:true,
       httpOnly:false
     })
-    res.status(201).json({ message: "User logged in successfully", success: true });
-    next();
+    res.status(201).json({ message: "User logged in successfully", success: true, token });
 }))
+
+app.get("/userDetails", userVerification)
 
 app.all("{*splat}", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"))

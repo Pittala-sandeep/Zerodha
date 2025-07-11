@@ -42,6 +42,13 @@ export default function LoginPage() {
       { withCredentials: true }
     );
 
+    if (data.success) {
+      localStorage.setItem("token", data.token); // Store token in localStorage
+      console.log("Logged in");
+    } else {
+      console.error("Login failed:", data.message);
+    }
+
     let handleSuccess = (msg) =>
       toast.success(msg, {
         position: "bottom-right",
