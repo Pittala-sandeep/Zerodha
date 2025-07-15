@@ -3,7 +3,7 @@ import Hero from "./Hero.jsx";
 import Trust from "./Trust.jsx";
 import Pricing from "./Pricing.jsx";
 import Education from "./Education.jsx";
-import SignUp from "../SignUp.jsx";
+import SignUp from "../Signup.jsx";
 
 export default function HomePage() {
   return (
