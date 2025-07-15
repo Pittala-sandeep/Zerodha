@@ -47,7 +47,7 @@ const Menu = () => {
     if (success) {
           handleSuccess(message);
           setTimeout(() => {
-            window.location.href = "http://localhost:5174";
+            window.location.href = "https://zerodha-frontend-71is.onrender.com";
           }, 1000);
         } else {
           handleError(message);

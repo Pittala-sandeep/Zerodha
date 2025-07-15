@@ -61,7 +61,7 @@ export default function LoginPage() {
     if (success) {
       handleSuccess(message);
       setTimeout(() => {
-        window.location.href = "http://localhost:5173";
+        window.location.href = "https://zerodha-dashboard-es50.onrender.com";
       }, 1000);
     } else {
         handleError(message)
