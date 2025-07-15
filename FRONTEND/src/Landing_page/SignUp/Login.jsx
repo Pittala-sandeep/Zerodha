@@ -35,7 +35,7 @@ export default function LoginPage() {
     }
     setErrors({});
     let { data } = await axios.post(
-      "http://localhost:5000/login",
+      "https://zerodha-1ppf.onrender.com/login",
       {
         ...inputValue,
       },

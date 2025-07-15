@@ -16,7 +16,7 @@ const Menu = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/userDetails", {
+      const res = await axios.get("https://zerodha-1ppf.onrender.com/userDetails", {
         withCredentials: true,
       });
 
@@ -36,7 +36,7 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try{
-    let { data } = await axios.get("http://localhost:5000/logout", { withCredentials: true });
+    let { data } = await axios.get("https://zerodha-1ppf.onrender.com/logout", { withCredentials: true });
     const { success, message } = data;
 
     const handleError = (msg) =>

@@ -39,7 +39,7 @@ export default function SignUp() {
     setErrors({});
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/signup",
+        "https://zerodha-1ppf.onrender.com/signup",
         inputValue,
         { withCredentials: true }
       );
