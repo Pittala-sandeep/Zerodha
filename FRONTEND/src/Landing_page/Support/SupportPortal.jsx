@@ -1,5 +1,5 @@
 import React from "react";
-import './supportPortal.css'
+import './SupportPortal.css'
 
 export default function SupportPortal(){
     return(
