@@ -1,6 +1,6 @@
 import React from "react";
 import Charges from "./Charges";
-import ChargesTable from "./brokerage";
+import ChargesTable from "./Brokerage";
 
 export default function PricingPage(){
     return(
