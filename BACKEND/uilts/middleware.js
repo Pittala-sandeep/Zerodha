@@ -14,24 +14,23 @@ module.exports.validateUser = (req, res, next) =>{
     }
 }
 
-module.exports.userVerification = (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ success: false, message: "Unauthorized" });
+module.exports.userVerification = async (req, res) => {
+  const token = req.cookies.token;
+
+  if(!token){
+    return res.status(401).json({success:false, message:"Unauthorized: No token in cookie"});
   }
 
-  const token = authHeader.split(" ")[1];
-  if (!token) {
-    return res.json({ success: false });
-  }
+  try{
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const user = await User.findById(decoded.id).select("-password");
 
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    if (err) {
-      return res.json({ success: false });
-    } else {
-      const user = await User.findById(data.id);
-      if (user) return res.json({ success: true, user });
-      else return res.json({ success: false });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
-  });
+
+    return res.json({ success: true, user });
+  } catch (err) {
+    return res.status(401).json({ success: false, message: "Unauthorized: Invalid token" });
+  }
 }

@@ -1,7 +1,7 @@
 .container {
     --radius: 4px;
-    width: 40%;
-    height: 63%;
+    width: 30% !important;
+    height: 30% !important;
     background: rgb(245, 245, 245);
     position: absolute;
     bottom: 0;

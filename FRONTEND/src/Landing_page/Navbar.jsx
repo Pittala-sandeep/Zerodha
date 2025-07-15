@@ -40,9 +40,6 @@ export default function ZerodhaNavbar() {
             <li className="nav-item mx-3">
               <Link className="nav-link" to="/support" >Support</Link>
             </li>
-            <li className="nav-item mx-3">
-              <Link className="nav-link"><i className="fa fa-bars "></i></Link>
-            </li>
           </ul>
         </div>
       </div>

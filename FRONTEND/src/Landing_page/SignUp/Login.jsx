@@ -43,7 +43,6 @@ export default function LoginPage() {
     );
 
     if (data.success) {
-      localStorage.setItem("token", data.token); // Store token in localStorage
       console.log("Logged in");
     } else {
       console.error("Login failed:", data.message);

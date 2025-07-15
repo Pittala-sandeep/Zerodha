@@ -28,37 +28,32 @@ export default function SignUp() {
     });
   };
 
-  let handleOnSubmit = async (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
+
     setErrors({});
     try {
-      let { data } = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:5000/signup",
-        {
-          ...inputValue,
-        },
+        inputValue,
         { withCredentials: true }
       );
 
-      console.log(data)
+      const { success, message, user } = data;
 
-      const handleError = (err) =>
-        toast.error(err, {
-          position: "bottom-left",
-        });
+      const handleError = (msg) =>
+        toast.error(msg, { position: "bottom-left" });
       const handleSuccess = (msg) =>
-        toast.success(msg, {
-          position: "bottom-right",
-        });
+        toast.success(msg, { position: "bottom-right" });
 
-      const { success, message } = data;
       if (success) {
         handleSuccess(message);
+        console.log("Signed up user:", user);
         setTimeout(() => {
           window.location.href = "http://localhost:5173";
         }, 1000);
@@ -66,14 +61,12 @@ export default function SignUp() {
         handleError(message);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Signup error:", error);
+      toast.error("Something went wrong", { position: "bottom-left" });
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-      username: "",
-    });
+
+    // Reset form
+    setInputValue({ email: "", password: "", username: "" });
   };
 
   return (

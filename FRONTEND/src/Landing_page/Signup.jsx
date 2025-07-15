@@ -8,12 +8,12 @@ export default function SignUp({text,heading}){
                 <p className="mb-5 fs-5 text-muted ">
                 {text}
                 </p>
-                <button
+                <a href="/signup"><button
                 className="p-2 btn  fs-5 mb-5 signup"
                 style={{ width: "18%", margin: "0 auto" }}
                 >
                 Sign up for free
-                </button>
+                </button></a>
             </div>
         </div>
     )

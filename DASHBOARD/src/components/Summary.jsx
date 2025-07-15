@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Summary = () => {
+  let [user, setUser] = useState(null);
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/userDetails", {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        setUser(res.data.user);
+      } else {
+        console.warn("User fetch failed:", res.data.message);
+      }
+    } catch (err) {
+      console.error("Error fetching user from cookie:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <>
       <div className="username">
-        <h6>Hi, User!</h6>
+        <h6>Hi, <i>{user ? user.username : "loading.."} !</i></h6>
         <hr className="divider" />
       </div>
 
