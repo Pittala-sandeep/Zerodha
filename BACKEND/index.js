@@ -103,10 +103,11 @@ app.post("/signup", validateUser, WrapAsync(async (req, res, next) => {
   let token = createSecretToken(newUser._id);
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: "Lax",
+    sameSite: "None",
     secure: true,
+    path: "/",
     maxAge: 3 * 24 * 60 * 60 * 1000
-  })
+  });
   res.status(201).json({
     success: true,
     message: "User signed in successfully",
@@ -133,20 +134,21 @@ app.post("/login", WrapAsync(async (req, res, next) => {
   }
   let token = createSecretToken(existingUser._id);
   res.cookie("token", token, {
-    withCredentials: true,
-    httpOnly: false,
-    path:"/",
-    sameSite: "None"
-  })
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    path: "/",
+    maxAge: 3 * 24 * 60 * 60 * 1000
+  });
   res.status(201).json({ message: "User logged in successfully", success: true, token });
 }))
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token", {
-    httpOnly: false,        
+    httpOnly: false,
     sameSite: "Lax",
     secure: false,
-    path: "/",              
+    path: "/",
   });
   return res.json({ success: true, message: "Logged out successfully" });
 });
