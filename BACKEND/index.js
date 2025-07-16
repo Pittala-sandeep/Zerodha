@@ -135,7 +135,8 @@ app.post("/login", WrapAsync(async (req, res, next) => {
   res.cookie("token", token, {
     withCredentials: true,
     httpOnly: false,
-    path:"/"
+    path:"/",
+    sameSite: "None"
   })
   res.status(201).json({ message: "User logged in successfully", success: true, token });
 }))
