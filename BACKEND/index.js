@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', "http://localhost:5174"],
+    origin: ['https://zerodha-frontend-71is.onrender.com', "https://zerodha-dashboard-es50.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
