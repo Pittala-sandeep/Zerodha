@@ -15,7 +15,7 @@ const WatchList = () => {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/watchlist")
+    axios.get("https://zerodha-1ppf.onrender.com/watchlist")
     .then(res => setData(res.data))
     .catch(err => console.log(er))
   }, [])

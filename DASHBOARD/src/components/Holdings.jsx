@@ -8,7 +8,7 @@ const Holdings = () => {
 
 
   useEffect(() =>{
-    axios.get("http://localhost:5000/holding")
+    axios.get("https://zerodha-1ppf.onrender.com/holding")
      .then(res => setData(res.data))
      .catch(err => console.error(err));
   },[])
